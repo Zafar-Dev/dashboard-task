@@ -1,13 +1,5 @@
 
-
-
-// --- Variables ---
-$primary-color: rgb(22, 119, 255);
-$primary-light: rgb(230, 244, 255);
-$secondary-color: rgb(255, 255, 255);
-$grey-color: rgb(38, 38, 38);
-$error-color: #e74c3c;
-$success-color: #2ecc71;
+@import "./variables";
 
 
 * {
@@ -46,7 +38,6 @@ body {
 .menu-icon-mobile {
   background: none;
   border: none;
-  color: white;
   font-size: 1.5rem;
   cursor: pointer;
   display: none;
@@ -60,22 +51,31 @@ body {
 .sidebar {
   background-color: $secondary-color;
   width: 250px;
-  padding: 1rem;
+  padding: 1rem 0;
   transition: transform 0.3s ease;
   border-right: 1px solid rgb(240, 240, 240);
   nav ul {
     list-style: none;
 
+    .active {
+        background-color: $primary-light;
+        border-right: 2px solid $primary-color;
+        
+        a {
+            color: $primary-color;
+        }
+    }
+
     li {
-      margin-bottom: 1rem;
 
       a {
         text-decoration: none;
         color: $grey-color;
-        font-weight: bold;
+        font-weight: 400;
+        font-size: 0.875rem;
         display: block;
-        padding: 0.5rem;
-        border-radius: 4px;
+        padding: 0.68rem 1.5rem;
+        border-radius: 1px;
         transition: all 0.3s ease;
 
         &:hover {
@@ -89,28 +89,31 @@ body {
 
 .content-area {
   flex: 1;
-  padding: 2rem;
-//   background-color: white;
+  padding: 2.5rem;
   background-color: rgb(250, 250, 251);
   .content {
     max-width: 800px;
-    margin: 0 auto;
 
     h1 {
       margin-bottom: 1rem;
+    }
+
+    .content-box {
+        background-color: #fff;
+        border-radius: 4px;
+        border: 1px solid rgb(230, 235, 241);
     }
   }
 }
 
 .footer {
-  background-color: $secondary-color;
-  border-top: 1px solid rgb(240, 240, 240);
+  background-color: #082e641a;
+  border-top: 1px solid #5c6bc042;
   text-align: center;
   padding: 1rem;
   position: sticky;
   bottom: 0;
 }
-
 
 // --- Responsive styles ---
 @media (max-width: 992px) {

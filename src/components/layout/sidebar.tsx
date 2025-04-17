@@ -1,26 +1,31 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, matchPath } from 'react-router-dom';
 import React from 'react';
 import Routes from '../../routes';
+import menuItems from '../../utils/menu-items';
 
 interface Props {
   isSidebarOpen: boolean;
 }
 
 const Sidebar: React.FC<Props> = ({ isSidebarOpen }) => {
+  const { pathname } = useLocation();
+
   return (
     <div className='container'>
       <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <nav>
           <ul>
-            <li>
-              <Link to='/'>Home</Link>
-            </li>
-            <li>
-              <Link to='/about'>About</Link>
-            </li>
-            <li>
-              <Link to='/contact'>Contact</Link>
-            </li>
+            {menuItems.map((item) => {
+              const isSelected = !!matchPath({ path: item.url }, pathname);
+              return (
+                <NavItem
+                  title={item.title}
+                  to={item.url}
+                  selected={isSelected}
+                  key={item.title}
+                />
+              );
+            })}
           </ul>
         </nav>
       </aside>
@@ -29,6 +34,20 @@ const Sidebar: React.FC<Props> = ({ isSidebarOpen }) => {
         <Routes />
       </main>
     </div>
+  );
+};
+
+interface NavItemProps {
+  to: string;
+  title: string;
+  selected: boolean;
+}
+
+const NavItem: React.FC<NavItemProps> = (item) => {
+  return (
+    <li className={`${item.selected ? 'active' : ''}`}>
+      <Link to={item.to}>{item.title}</Link>
+    </li>
   );
 };
 

@@ -3,8 +3,8 @@ import Loadable from '../components/Loadable';
 import { lazy } from 'react';
 
 const HomePage = Loadable(lazy(() => import('../pages/home')));
-const AboutPage = Loadable(lazy(() => import('../pages/contact-us')));
-const ContactPage = Loadable(lazy(() => import('../pages/about')));
+const ContactPage = Loadable(lazy(() => import('../pages/contact-us')));
+const AboutPage = Loadable(lazy(() => import('../pages/about')));
 
 const Routes = () => {
   return (
