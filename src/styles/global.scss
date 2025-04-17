@@ -1,0 +1,150 @@
+
+
+
+// --- Variables ---
+$primary-color: rgb(22, 119, 255);
+$primary-light: rgb(230, 244, 255);
+$secondary-color: rgb(255, 255, 255);
+$grey-color: rgb(38, 38, 38);
+$error-color: #e74c3c;
+$success-color: #2ecc71;
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  background-color: $secondary-color;
+  border-bottom: 1px solid rgb(240, 240, 240);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  h1 {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+  }
+}
+
+.menu-icon-mobile {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  background-color: $secondary-color;
+  width: 250px;
+  padding: 1rem;
+  transition: transform 0.3s ease;
+  border-right: 1px solid rgb(240, 240, 240);
+  nav ul {
+    list-style: none;
+
+    li {
+      margin-bottom: 1rem;
+
+      a {
+        text-decoration: none;
+        color: $grey-color;
+        font-weight: bold;
+        display: block;
+        padding: 0.5rem;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: $primary-light;
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}
+
+.content-area {
+  flex: 1;
+  padding: 2rem;
+//   background-color: white;
+  background-color: rgb(250, 250, 251);
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.footer {
+  background-color: $secondary-color;
+  border-top: 1px solid rgb(240, 240, 240);
+  text-align: center;
+  padding: 1rem;
+  position: sticky;
+  bottom: 0;
+}
+
+
+// --- Responsive styles ---
+@media (max-width: 992px) {
+  .sidebar {
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-icon-mobile {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    bottom: 60px;
+    transform: translateX(-100%);
+    z-index: 90;
+
+    &.open {
+      transform: translateX(0);
+    }
+  }
+
+  .content-area {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .content {
+    padding: 1rem;
+  }
+}
