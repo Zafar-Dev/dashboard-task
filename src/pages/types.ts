@@ -14,6 +14,12 @@ export interface User {
       country: string;
     };
   }
+
+  export interface APIResponse {
+    data: {
+      results: User[]
+    }
+  }
   
   export interface FormData {
     name: string;

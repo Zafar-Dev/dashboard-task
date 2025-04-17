@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './index.styles.scss';
-import { User } from '../types';
+import { APIResponse, User } from '../types';
 import axios from 'axios';
 
 const AboutPage: React.FC = () => {
@@ -11,8 +11,8 @@ const AboutPage: React.FC = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response: any = await axios.get('https://randomuser.me/api/');
-        setUser(response?.data.results[0]);
+        const response: APIResponse = await axios.get('https://randomuser.me/api/');
+        setUser(response?.data?.results[0]);
         setLoading(false);
       } catch (err) {
         setError(
