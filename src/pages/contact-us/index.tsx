@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
+import { isEmpty, isValidEmail } from '../../utils/common';
 import { FormData, FormErrors } from '../types';
 import './index.styles.scss';
 
@@ -19,24 +20,30 @@ const ContactPage: React.FC = () => {
   };
 
   const validate = (): FormErrors => {
+    const { email, message, name } = formData;
     const newErrors: FormErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    if (!formData.email.trim()) newErrors.email = 'Email is required';
-    else if (!/^\S+@\S+\.\S+$/.test(formData.email))
-      newErrors.email = 'Email is invalid';
-    if (!formData.message.trim()) newErrors.message = 'Message is required';
+
+    if (isEmpty(name)) newErrors.name = 'Name is required';
+    if (isEmpty(message)) newErrors.message = 'Message is required';
+
+    if (isEmpty(email)) newErrors.email = 'Email is required';
+    else if (!isValidEmail(email)) newErrors.email = 'Email is invalid';
+
     return newErrors;
   };
 
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-    setSubmitted(true);
-  }, [validate]);
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      const validationErrors = validate();
+      if (!isEmpty(validationErrors)) {
+        setErrors(validationErrors);
+        return;
+      }
+      setSubmitted(true);
+    },
+    [validate, isEmpty]
+  );
 
   const successMessage = useMemo(
     () => (

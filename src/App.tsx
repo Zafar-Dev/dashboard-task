@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
 import './styles/global.scss';
 import Header from './components/layout/header';
 import Sidebar from './components/layout/sidebar';
